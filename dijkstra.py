@@ -20,6 +20,8 @@ def print_path(parents, path):
 
 
 graph = {}
+costs = {"meta": float("inf")}
+parents = {"meta": None}
 choice = 0
 while True:
     print("WYBIERZ OPCJĘ SPOŚRÓD DOSTĘPNYCH PONIŻEJ")
@@ -36,6 +38,15 @@ while True:
             print("Zakończ dodwanie krawędzi przypisując jej ujemną wartość")
             value = int(input("Podaj wartość krawędzi: "))
             if value < 0:
+                if node == "start":
+                    for key, value in graph[node].items():
+                        costs[key] = value
+                        parents[key] = "start"
+                else:
+                    if node not in costs.keys():
+                        costs[node] = float("inf")
+                    if node not in parents.keys():
+                        parents[node] = None
                 break
             
             edge = input("Podaj nazwę krawędzi: ")
@@ -46,10 +57,10 @@ while True:
 
     choice = 0
 
-infinity = float("inf")
-costs = {"a": 6, "b": 2, "meta": infinity}
+# infinity = float("inf")
+# costs = {"a": 6, "b": 2, "meta": infinity}
 
-parents = {"a": "start", "b": "start", "meta": None}
+# parents = {"a": "start", "b": "start", "meta": None}
 
 processed = []
 
