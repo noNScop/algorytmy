@@ -20,10 +20,31 @@ def print_path(parents, path):
 
 
 graph = {}
-graph["start"] = {"a": 6, "b": 2}
-graph["a"] = {"meta": 1}
-graph["b"] = {"a": 3, "meta": 5}
-graph["meta"] = {}
+choice = 0
+while True:
+    print("WYBIERZ OPCJĘ SPOŚRÓD DOSTĘPNYCH PONIŻEJ")
+    print("1. Dodaj NODE")
+    print("2. Dodaj metę i zakończ")
+    print()
+    while choice not in range(1, 3):
+        choice = int(input("Opcja: "))
+    
+    if choice == 1:
+        node = input("Podaj nazwę NODE'a: ")
+        graph[node] = {}
+        while True:
+            print("Zakończ dodwanie krawędzi przypisując jej ujemną wartość")
+            value = int(input("Podaj wartość krawędzi: "))
+            if value < 0:
+                break
+            
+            edge = input("Podaj nazwę krawędzi: ")
+            graph[node][edge] = value
+    else:
+        graph["meta"] = {}
+        break
+
+    choice = 0
 
 infinity = float("inf")
 costs = {"a": 6, "b": 2, "meta": infinity}
@@ -45,6 +66,7 @@ while node is not None:
     processed.append(node)
     node = find_lowest_cost_node(costs)
 
+print()
 print(f"Waga najkrótszej drogi: {costs['meta']}")
 print("Droga:")
 print_path(parents, ["meta"])
