@@ -6,7 +6,7 @@ def find_lowest_cost_node(costs):
         if cost < lowest_cost and node not in processed:
             lowest_cost = cost
             lowest_node = node
-        
+
     return lowest_node
 
 
@@ -30,7 +30,7 @@ while True:
     print()
     while choice not in range(1, 3):
         choice = int(input("Opcja: "))
-    
+
     if choice == 1:
         node = input("Podaj nazwę NODE'a: ")
         graph[node] = {}
@@ -48,7 +48,7 @@ while True:
                     if node not in parents.keys():
                         parents[node] = None
                 break
-            
+
             edge = input("Podaj nazwę krawędzi: ")
             graph[node][edge] = value
     else:
@@ -73,7 +73,7 @@ while node is not None:
         if costs[n] > new_cost:
             costs[n] = new_cost
             parents[n] = node
-            
+
     processed.append(node)
     node = find_lowest_cost_node(costs)
 
